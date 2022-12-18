@@ -17,7 +17,7 @@ return new class extends Migration
       $table->id();
       $table->string('subject_name');
       $table->integer('no_of_questions');
-      $table->foreignId('subject_id');
+      $table->index('subject_id');
       $table->foreign('subject_id')->references('id')->on('subjects')->onDelete('cascade');
       $table->integer('time_limit');
       $table->enum('test_type', ['MULTIPLE_CHOICE']);

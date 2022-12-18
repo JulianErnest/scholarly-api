@@ -20,9 +20,9 @@ return new class extends Migration
       $table->string('choice_b');
       $table->string('choice_c');
       $table->string('choice_d');
-      $table->foreignId('creator_id');
+      $table->index('creator_id');
       $table->foreign('creator_id')->references('id')->on('users')->onDelete('cascade');
-      $table->foreignId('test_id');
+      $table->index('test_id');
       $table->foreign('test_id')->references('id')->on('tests')->onDelete('cascade');
     });
   }
