@@ -20,9 +20,9 @@ return new class extends Migration
       $table->string('choice_b');
       $table->string('choice_c');
       $table->string('choice_d');
-      $table->index('creator_id');
+      $table->integer('creator_id')->unsigned();
       $table->foreign('creator_id')->references('id')->on('users')->onDelete('cascade');
-      $table->index('test_id');
+      $table->integer('test_id')->unsigned();
       $table->foreign('test_id')->references('id')->on('tests')->onDelete('cascade');
     });
   }
