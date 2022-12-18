@@ -26,6 +26,8 @@ return new class extends Migration
       $table->foreignId('test_id');
       $table->index('test_id');
       $table->foreign('test_id')->references('id')->on('tests')->onDelete('cascade');
+      $table->timestamps();
+      $table->softDeletes();
     });
   }
   /**

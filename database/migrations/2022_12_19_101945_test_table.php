@@ -15,11 +15,15 @@ return new class extends Migration
   {
     Schema::create('tests', function (Blueprint $table) {
       $table->id();
-      $table->integer('no_of_questions');
+      $table->string("test_name");
+      $table->string("test_description");
+      $table->foreignId('creator_id');
+      $table->foreign('creator_id')->references('id')->on('users')->onDelete('cascade');
       $table->foreignId('subject_id');
       $table->foreign('subject_id')->references('id')->on('subjects')->onDelete('cascade');
       $table->integer('time_limit');
-      $table->enum('test_type', ['MULTIPLE_CHOICE']);
+      $table->timestamps();
+      $table->softDeletes();
     });
   }
   /**
