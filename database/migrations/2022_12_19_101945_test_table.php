@@ -15,7 +15,6 @@ return new class extends Migration
   {
     Schema::create('tests', function (Blueprint $table) {
       $table->id();
-      $table->string('subject_name');
       $table->integer('no_of_questions');
       $table->foreignId('subject_id');
       $table->foreign('subject_id')->references('id')->on('subjects')->onDelete('cascade');
