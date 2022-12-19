@@ -59,6 +59,14 @@ class TestController extends BaseController
       return $this->sendResponse($tests, 'Successfully retrieved all tests');
     }
   }
+  
+  public function showById($id)
+  {
+    $tests = Test::where('id', $id)->get();
+    if (isset($tests)) {
+      return $this->sendResponse($tests, 'Successfully retrieved all tests');
+    }
+  }
 
   /**
    * Update the specified resource in storage.

@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use App\http\Controllers\AuthController;
+use App\Http\Controllers\ItemController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
@@ -32,5 +33,12 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
   // Test
   Route::get('/test', [TestController::class, 'index']);
   Route::post('/test/{id}', [TestController::class, 'store']);
+  Route::get('/test/byId/{id}', [TestController::class, 'showById']);
   Route::get('/test/{id}', [TestController::class, 'show']);
+
+  // Item
+  Route::post('/item/{id}', [ItemController::class, 'store']);
+  Route::get('/item/{id}', [ItemController::class, 'showByTest']);
+  Route::delete('/item/{id}', [ItemController::class, 'destroy']);
+
 });
