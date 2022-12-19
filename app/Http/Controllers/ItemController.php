@@ -79,6 +79,18 @@ class ItemController extends BaseController
     {
     }
 
+    public function search($keyword) {
+        $items = Item::query()
+                ->where('question', 'LIKE', "%{$keyword}%")
+                ->orWhere('answer', 'LIKE', "%{$keyword}%")
+                ->orWhere('choice_a', 'LIKE', "%{$keyword}%")
+                ->orWhere('choice_b', 'LIKE', "%{$keyword}%")
+                ->orWhere('choice_c', 'LIKE', "%{$keyword}%")
+                ->orWhere('choice_d', 'LIKE', "%{$keyword}%")
+                ->get();
+        return $this->sendResponse($items, '');
+    }
+
     /**
      * Remove the specified resource from storage.
      *

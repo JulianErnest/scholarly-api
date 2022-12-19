@@ -10,6 +10,25 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends BaseController
 {
+
+  public function getAllUsers()
+  {
+    $users = User::all();
+    if (isset($users)) {
+      return $this->sendResponse($users, 'Successfully retrieved all users');
+    }
+  }
+
+  public function search($keyword)
+  {
+    $items = User::query()
+      ->where('first_name', 'LIKE', "%{$keyword}%")
+      ->orWhere('last_name', 'LIKE', "%{$keyword}%")
+      ->orWhere('email', 'LIKE', "%{$keyword}%")
+      ->get();
+    return $this->sendResponse($items, '');
+  }
+
   public function register(Request $request)
   {
     $fields = $request->validate([

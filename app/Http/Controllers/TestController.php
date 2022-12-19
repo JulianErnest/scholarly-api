@@ -94,6 +94,19 @@ class TestController extends BaseController
     }
   }
 
+  public function search(Request $request) {
+      $search = $request->query('keyword'); 
+      $items = Test::query()
+              ->where('question', 'LIKE', "%{$search}%")
+              ->orWhere('answer', 'LIKE', "%{$search}%")
+              ->orWhere('choice_a', 'LIKE', "%{$search}%")
+              ->orWhere('choice_b', 'LIKE', "%{$search}%")
+              ->orWhere('choice_c', 'LIKE', "%{$search}%")
+              ->orWhere('choice_d', 'LIKE', "%{$search}%")
+              ->get();
+      $this->sendResponse($items, '');
+  }
+
   /**
    * Remove the specified resource from storage.
    *
