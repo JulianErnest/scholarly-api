@@ -35,6 +35,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
   Route::post('/test/{id}', [TestController::class, 'store']);
   Route::get('/test/byId/{id}', [TestController::class, 'showById']);
   Route::get('/test/{id}', [TestController::class, 'show']);
+  Route::put('/test/{id}', [TestController::class, 'update']);
 
   // Item
   Route::post('/item/{id}', [ItemController::class, 'store']);

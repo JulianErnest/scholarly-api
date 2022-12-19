@@ -77,7 +77,6 @@ class ItemController extends BaseController
      */
     public function update(Request $request, $id)
     {
-        //
     }
 
     /**

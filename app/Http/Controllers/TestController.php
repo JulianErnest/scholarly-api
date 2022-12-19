@@ -77,7 +77,21 @@ class TestController extends BaseController
    */
   public function update(Request $request, $id)
   {
-    //
+    $request->validate([
+      'test_name' => 'required|string',
+      'time_limit' => 'required|string',
+      'test_description' => 'required|string',
+      'subject_id' => 'required'
+    ]);
+
+    $test = Test::find($id);
+    $test->fill($request->except(['creator_id', 'subject_id']));
+    $test->creator_id = $id;
+    $test->subject_id = $request['subject_id'];
+
+    if ($test->save()) {
+      return $this->sendResponse($test, 'Successfully updated test');
+    }
   }
 
   /**
