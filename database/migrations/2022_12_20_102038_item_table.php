@@ -16,6 +16,7 @@ return new class extends Migration
     Schema::create('items', function (Blueprint $table) {
       $table->id();
       $table->string('question');
+      $table->string('answer');
       $table->string('choice_a');
       $table->string('choice_b');
       $table->string('choice_c');
