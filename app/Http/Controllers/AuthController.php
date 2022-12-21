@@ -17,7 +17,7 @@ class AuthController extends BaseController
       'last_name' => 'required|string|max:255',
       'email' => 'required|email|string|unique:users,email|max:255',
       'password' => 'required|string|max:255',
-      'user_type' => 'in:MANAGER,CREATOR,CHECKER',
+      'user_type' => 'in:MANAGER,CREATOR',
       'confirm_password' => 'required|same:password|max:255'
     ]);
 
@@ -26,6 +26,7 @@ class AuthController extends BaseController
       'last_name' => $fields['last_name'],
       'email' => $fields['email'],
       'password' => bcrypt($fields['password']),
+      'user_type' => $fields['user_type']
     ]);
 
     $token = $user->createToken('myapptoken')->plainTextToken;
