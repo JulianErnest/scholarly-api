@@ -97,24 +97,18 @@ class TestController extends BaseController
     }
   }
 
-  public function search(Request $keyword)
+  public function search($keyword)
   {
-    // $items = Test::query()
-    //   ->join('subjects', 'tests.subject_id', '=', 'subjects.id')
-    //   ->join('users', 'tests.creator_id', '=', 'users.id')
-    //   ->where('tests.test_description', 'LIKE', "%{$keyword}%")
-    //   ->orWhere('tests.test_name', 'LIKE', "%{$keyword}%")
-    //   ->orWhere('subjects.subject_name', 'LIKE', "%{$keyword}%")
-    //   ->orWhere('users.first_name', 'LIKE', "%{$keyword}%")
-    //   ->orWhere('users.last_name', 'LIKE', "%{$keyword}%")
-    //   ->get();
-
     $items = Test::query()
       ->join('subjects', 'tests.subject_id', '=', 'subjects.id')
       ->join('users', 'tests.creator_id', '=', 'users.id')
-      ->where('subjects.name', 'LIKE', 'math')
+      ->orWhere('test_description', 'LIKE', "%{$keyword}%")
+      ->orWhere('test_name', 'LIKE', "%{$keyword}%")
+      ->orWhere('subject_name', 'LIKE', "%{$keyword}%")
+      ->orWhere('first_name', 'LIKE', "%{$keyword}%")
+      ->orWhere('last_name', 'LIKE', "%{$keyword}%")
       ->get();
-    $this->sendResponse($items, '');
+    return $this->sendResponse($items, '');
   }
 
   /**
