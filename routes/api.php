@@ -38,12 +38,12 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
   Route::get('/test/byId/{id}', [TestController::class, 'showById']);
   Route::get('/test/{id}', [TestController::class, 'show']);
   Route::put('/test/{id}', [TestController::class, 'update']);
+  Route::get('/searchTest/{keyword}', [TestController::class, 'search']);
 
   // Item
   Route::get('/item', [ItemController::class, 'index']);
   Route::post('/item/{id}', [ItemController::class, 'store']);
   Route::get('/item/{id}', [ItemController::class, 'showByTest']);
   Route::delete('/item/{id}', [ItemController::class, 'destroy']);
-  Route::post('/item/{keyword}', [ItemController::class, 'search']);
-
+  Route::post('/searchItem/{keyword}', [ItemController::class, 'search']);
 });

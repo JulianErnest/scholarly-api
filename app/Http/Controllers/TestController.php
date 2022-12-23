@@ -15,7 +15,10 @@ class TestController extends BaseController
    */
   public function index()
   {
-    $tests = Test::all();
+    $tests = Test::query()
+      ->join('subjects', 'tests.subject_id', '=', 'subjects.id')
+      ->join('users', 'tests.creator_id', '=', 'users.id')
+      ->get();
     if (isset($tests)) {
       return $this->sendResponse($tests, 'Successfully retrieved tests');
     }
@@ -59,7 +62,7 @@ class TestController extends BaseController
       return $this->sendResponse($tests, 'Successfully retrieved all tests');
     }
   }
-  
+
   public function showById($id)
   {
     $tests = Test::where('id', $id)->get();
@@ -94,17 +97,24 @@ class TestController extends BaseController
     }
   }
 
-  public function search(Request $request) {
-      $search = $request->query('keyword'); 
-      $items = Test::query()
-              ->where('question', 'LIKE', "%{$search}%")
-              ->orWhere('answer', 'LIKE', "%{$search}%")
-              ->orWhere('choice_a', 'LIKE', "%{$search}%")
-              ->orWhere('choice_b', 'LIKE', "%{$search}%")
-              ->orWhere('choice_c', 'LIKE', "%{$search}%")
-              ->orWhere('choice_d', 'LIKE', "%{$search}%")
-              ->get();
-      $this->sendResponse($items, '');
+  public function search(Request $keyword)
+  {
+    // $items = Test::query()
+    //   ->join('subjects', 'tests.subject_id', '=', 'subjects.id')
+    //   ->join('users', 'tests.creator_id', '=', 'users.id')
+    //   ->where('tests.test_description', 'LIKE', "%{$keyword}%")
+    //   ->orWhere('tests.test_name', 'LIKE', "%{$keyword}%")
+    //   ->orWhere('subjects.subject_name', 'LIKE', "%{$keyword}%")
+    //   ->orWhere('users.first_name', 'LIKE', "%{$keyword}%")
+    //   ->orWhere('users.last_name', 'LIKE', "%{$keyword}%")
+    //   ->get();
+
+    $items = Test::query()
+      ->join('subjects', 'tests.subject_id', '=', 'subjects.id')
+      ->join('users', 'tests.creator_id', '=', 'users.id')
+      ->where('subjects.name', 'LIKE', 'math')
+      ->get();
+    $this->sendResponse($items, '');
   }
 
   /**
