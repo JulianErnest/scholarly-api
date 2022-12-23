@@ -45,5 +45,5 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
   Route::post('/item/{id}', [ItemController::class, 'store']);
   Route::get('/item/{id}', [ItemController::class, 'showByTest']);
   Route::delete('/item/{id}', [ItemController::class, 'destroy']);
-  Route::post('/searchItem/{keyword}', [ItemController::class, 'search']);
+  Route::get('/searchItem/{keyword}', [ItemController::class, 'search']);
 });
