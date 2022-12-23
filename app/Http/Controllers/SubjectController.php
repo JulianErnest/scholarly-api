@@ -41,6 +41,14 @@ class SubjectController extends BaseController
     }
   }
 
+  public function search($keyword)
+  {
+    $items = Subject::query()
+      ->where('subject_name', 'LIKE', "%{$keyword}%")
+      ->get();
+    return $this->sendResponse($items, '');
+  }
+
   /**
    * Display the specified resource.
    *
